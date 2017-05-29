@@ -46,7 +46,9 @@ public class Accueil extends HttpServlet implements APIContact {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getSession().setAttribute("client", String.valueOf(3));
+		Client client = new Client();
+		client.setId(3);
+		request.getSession().setAttribute("client", client);
 
         ObjectMapper mapper = new ObjectMapper();
 //        String data = APIContact.getDataFromAPI("http://localhost:8080/sr03_project_server/getGames");

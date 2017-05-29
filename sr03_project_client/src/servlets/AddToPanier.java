@@ -33,7 +33,7 @@ public class AddToPanier extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String client =(String) request.getSession().getAttribute("client");
+		String client =((Client) request.getSession().getAttribute("client")).getId().toString();
 		String game_id = request.getParameter("gameId");
 	      ObjectMapper mapper = new ObjectMapper();
 	      String data = APIContact.getDataFromAPI("http://localhost:8080/sr03_project_server/getGames?gameId="+game_id+"&client="+client);
