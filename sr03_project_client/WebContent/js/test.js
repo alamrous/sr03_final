@@ -2,7 +2,7 @@
  * 
  */
 document.addEventListener( 'DOMContentLoaded', function () {
-	addButtonListener();
+//	addButtonListener();
 	showGameList();
 	  
 	 }, false );
@@ -14,7 +14,7 @@ document.addEventListener( 'DOMContentLoaded', function () {
 			   for (var i = 0, len = elem.length; i < len; i++) {
 			     elem[i].addEventListener('click',function(){
 			    	   let xhr = new XMLHttpRequest();
-			    	   xhr.open('POST', 'http://localhost:8080/sr03_projet/PanierAction');
+			    	   xhr.open('POST', 'http://localhost:8080/sr03_project_server/AddToPanier');
 			    		xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 			    	   console.log(xhr.readyState);
 			    	 
@@ -25,26 +25,30 @@ document.addEventListener( 'DOMContentLoaded', function () {
 				    	    }	 
 			    		   
 			    	 });
-			    	   xhr.send('productId=' +this.getAttribute("id"));
+			    	   xhr.send('gameId=' +this.getAttribute("id"));
 
 			     });
 			    }
 	}
 	function showGameList(){
-	 	 let father = document.getElementById('TableView');
+	 	 let father = document.getElementById('GameTable');
+	 	 let div_father=document.getElementById('TableView');
  	   let xhr = new XMLHttpRequest();
 	   xhr.open('POST', 'http://localhost:8080/sr03_project_client/getAllGame');
 		xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	   console.log(xhr.readyState);
-
-	 xhr.addEventListener('readystatechange', function(data) {
+	 xhr.addEventListener('readystatechange', function() {
 		   if (xhr.readyState === 4) { 
     	    	// La constante DONE appartient à l'objet XMLHttpRequest, elle n'est pas globale
-		    	 father.appendChild(data);
+		    	 father.innerHTML = father.innerHTML + xhr.responseText;
+		    	 
     	    }	 
 		   
 	 });
 	   xhr.send();
+	}
+	function searchGame(){
+		
 	}
 
   

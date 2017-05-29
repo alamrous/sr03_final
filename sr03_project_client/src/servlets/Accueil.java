@@ -30,7 +30,7 @@ import beans.Plateforme;
  * Servlet implementation class GameController
  */
 @WebServlet("/Accueil")
-public class Accueil extends HttpServlet {
+public class Accueil extends HttpServlet implements APIContact {
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -46,49 +46,22 @@ public class Accueil extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		request.getSession().setAttribute("client", String.valueOf(3));
+
         ObjectMapper mapper = new ObjectMapper();
-        String data = this.getDataFromAPI("http://localhost:8080/sr03_project_server/getGames");
-           Jeu[] jeu_liste = mapper.readValue(data, Jeu[].class);
-        data = this.getDataFromAPI("http://localhost:8080/sr03_project_server/getFormComponents");
+//        String data = APIContact.getDataFromAPI("http://localhost:8080/sr03_project_server/getGames");
+//           Jeu[] jeu_liste = mapper.readValue(data, Jeu[].class);
+//        request.setAttribute("liste", jeu_liste);
+        String data = APIContact.getDataFromAPI("http://localhost:8080/sr03_project_server/getFormComponents");
         HashMap<String, String> formComponents = mapper.readValue(data, HashMap.class);
 //        System.out.println(formComponents.get("editeurs"));
-		request.setAttribute("liste", jeu_liste);
 		request.setAttribute("plateformes", formComponents.get("plateformes"));
 		request.setAttribute("editeurs", formComponents.get("editeurs"));
  	   request.getRequestDispatcher("GamesList.jsp").forward(request, response);
 
 
 	}
-	private String getDataFromAPI(String path)
-	{
-		try {
-			URL url = new URL (path);
-			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-			connection.setDoOutput (true);
-			connection.setDoInput (true);
-			connection.setRequestProperty("Content-Type","application/x-www-form-urlencoded;charset=UTF-8");
-
-			OutputStream os = connection.getOutputStream();
-			//TODO: optionally, send something through the OutputStream to your servlet
-			os.flush();
-			os.close();
-			   BufferedReader br = new BufferedReader(
-					   new InputStreamReader(connection.getInputStream(),"UTF-8"));
-				//TODO: retrieve your results.getInputStream()));
-			   StringBuilder sb = new StringBuilder();
-			   String line;
-			   while ((line = br.readLine()) != null) {
-			       sb.append(line+"\n");
-			   }
-			   return sb.toString();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
-		
-	}
-
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
