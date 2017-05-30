@@ -2,7 +2,10 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -50,7 +53,29 @@ public class GameService extends HttpServlet {
 		// TODO Auto-generated method stub
 
 		ArrayList<Jeu> liste= new ArrayList<Jeu>();
+		if(request.getParameter("action") == null)
 		liste = GameManager.getAllGame();
+		else{
+			String title=  request.getParameter("title");
+			Integer plateform= (request.getParameter("plateforme") == null)?null: Integer.valueOf(request.getParameter("plateforme"));
+			Double priceMin= (request.getParameter("minPrice") == null)?null: Double.valueOf(request.getParameter("minPrice"));
+			Double priceMax= (request.getParameter("maxPrice") == null)?null: Double.valueOf(request.getParameter("maxPrice"));
+			Integer editor=  (request.getParameter("editeur") == null)?null:Integer.valueOf(request.getParameter("editeur"));
+			Date year = null;
+			if(request.getParameter("year") != null){
+				try {
+					SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+					year = formatter.parse(request.getParameter("year"));
+
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} 
+			}
+			liste =GameManager.getGameUsingFields(title, plateform, editor, priceMin, priceMax, year);
+			System.out.println(liste);
+
+		}
        try {
     		Jeu[] jeu_liste = liste.toArray(new Jeu[liste.size()]);
     		request.setAttribute("liste", jeu_liste);
@@ -60,7 +85,6 @@ public class GameService extends HttpServlet {
     		PrintWriter out = response.getWriter();
     		out.print(data);
     		out.flush();
-//    	   request.getRequestDispatcher("GamesList.jsp").forward(request, response);
 
 	} catch (Exception e) {
 		// TODO: handle exception

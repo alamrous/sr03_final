@@ -23,7 +23,7 @@
 <div class="row">
 <div class="col-md-12">
 
-<div class="col-md-4" style="background-color: #e8e8e8;border-radius: 10px;">
+<div class="col-md-4" style="background-color: #e8e8e8;border-radius: 10px;" id="SearchBar">
 <h3> Rechercher un jeu</h3>
 <form>
 <table style="border-collapse: separate;border-spacing:0 5px;">
@@ -53,36 +53,23 @@
 </tr>
 <tr>
 <th>Prix Minimum</th>
-<td><input type="text" name="minPrice" class="form-control"/></td>
+<td><input type="number" name="minPrice" class="form-control"/></td>
 </tr>
 <tr>
 <th>Prix Maximum</th>
-<td><input type="text" name="maxPrice"/ class="form-control"></td>
+<td><input type="number" name="maxPrice"/ class="form-control"></td>
 </tr>
 <tr>
 </tr>
 </table>
 
 </form>
-<button class="btn btn-lg btn-primary btn-block" id="searchGame">Rechercher</button>
+<button class="btn btn-lg btn-primary btn-block" id="searchGame" disabled>Rechercher</button>
 
 </div>
 <div class="col-md-8" id="TableView">
 <h2>Liste des jeux</h2>
 <table class="table" id="GameTable">
-<tr>
-<th>Titre</th>
-<th>Pegi</th>
-<th>Note</th>
-<th>Editeur</th>	
-<th>Pays</th>
-<th>Plateforme</th>
-<th>Prix</th>
-<% if(request.getSession().getAttribute("client") != null){ %>
-<th> Action </th>
-<%} %>
-</tr> 
-
 
 </table></div>
 </div>

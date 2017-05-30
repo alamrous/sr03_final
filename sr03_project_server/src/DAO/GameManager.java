@@ -116,7 +116,6 @@ public static ArrayList<Jeu> getGameUsingFields(String title, Integer plateform,
 
 	ConnexionBDD mysqlConnect = new ConnexionBDD();
 	Connection connection =  mysqlConnect.connect();
-
 	String sql = "SELECT test.Jeu.*, test.Pegi.description AS Pegi_description, test.Editeur.nom AS Editeur_name, test.Pays.nom AS Country_name, "
 			+ " Jeu_Plateforme.prix as Prix, Jeu_Plateforme.id,Plateforme.nom as plat_name "
 			+ " FROM test.Jeu"
@@ -124,19 +123,32 @@ public static ArrayList<Jeu> getGameUsingFields(String title, Integer plateform,
 			+ " INNER JOIN test.Plateforme ON test.Jeu_Plateforme.plateforme_fk=test.Plateforme.id"
 			+ " INNER JOIN test.Pegi ON test.Pegi.id=test.Jeu.pegi_fk"
 			+ " INNER  JOIN test.Editeur ON test.Editeur.id=test.Jeu.editeur_fk"
-			+ " iNNER  JOIN test.Pays ON test.Pays.id=test.Editeur.country_fk "
-			+" WHERE ";
+			+ " iNNER  JOIN test.Pays ON test.Pays.id=test.Editeur.country_fk ";
 	String add= " ";
 	int i = 0;
 	if(title!= null) { 
-		System.out.println("ici");
-		if (add== " ") add= add+"  Jeu.title LIKE \' ? \' ";
-		i = i+1;}
+		if (add== " ") add= add+"  Jeu.title LIKE ?  ";
+		i = i + 1 ;
+		}
+	System.out.println(i);
 	if(plateform != null) {if (add== " ") add= add+" Plateforme.id= ? "; else add =add+" AND Plateforme.id= ? "; i = i+1; }
 	if(editor != null) {if (add== " ") add= add+" Editeur.id= ? "; else add =add+" AND Editeur.id= ? "; i = i+1; }
-	if(priceMin != null) {if (add== " ") add= add+" Jeu_Plateforme.prix <= ? "; else add =add+" AND Jeu_Plateforme.prix <= ?  "; i = i+1; }
-	if(priceMax != null) {if (add== " ") add= add+" Jeu_Plateforme.prix >= ? "; else add =add+" AND Jeu_Plateforme.prix >= ?  "; i = i+1; }
-	sql=sql+add;
+	if(priceMin != null) {
+		System.out.println(priceMin);
+		if (add== " ") add= add+" Jeu_Plateforme.prix >= ? ";
+		else add =add+" AND Jeu_Plateforme.prix >= ?  "; i = i+1; 
+		}
+	if(priceMax != null) {
+		System.out.println(priceMax);
+
+		if (add== " ") add= add+" Jeu_Plateforme.prix <= ? "; 
+		else add =add+" AND Jeu_Plateforme.prix <= ?  "; i = i+1; 
+		}
+	System.out.println("Max "+priceMax);
+	System.out.println("Min "+priceMin);
+
+	sql=(add == "")?sql:sql+" WHERE "+add;
+	System.out.println(add);
 	try {
 		PreparedStatement statement=connection.prepareStatement(sql);
 	
@@ -161,10 +173,9 @@ public static ArrayList<Jeu> getGameUsingFields(String title, Integer plateform,
 			}
 			if(title != null )
 			{
-				statement.setString(i, title);
+				statement.setString(i, "%"+title+"%");
 				i = i - 1 ;
 			}
-			
 			System.out.println(statement);
 			ResultSet res = statement.executeQuery();
 			Jeu jeu;
@@ -195,7 +206,7 @@ public static ArrayList<Jeu> getGameUsingFields(String title, Integer plateform,
 				jeu.setPlateforme_jeu_fk(res.getInt("Jeu_Plateforme.id"));
 				liste.add(jeu);
 			}
-			
+			System.out.println(liste);
 			res.close();	
 			mysqlConnect.disconnect();
 			

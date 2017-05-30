@@ -39,8 +39,8 @@ public class FormComponentService extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String  option="";
-		String editeurOption= "";
+		String  option="<option value=\"\"></option>";
+		String editeurOption= "<option value=\"\"></option>";
 		ArrayList<Plateforme> plateformes = PlateformeManager.getPlateforme();
 		for (Iterator iterator = plateformes.iterator(); iterator.hasNext();) {
 			Plateforme plateforme = (Plateforme) iterator.next();

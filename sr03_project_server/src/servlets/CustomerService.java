@@ -83,7 +83,7 @@ public class CustomerService extends HttpServlet {
 		client.setPwd(request.getParameter("pwd"));
 		client.setAddress(request.getParameter("adress"));
 		client.setEmail(request.getParameter("email"));
-		if(request.getParameter("birthdate").equals(""))
+		if(request.getParameter("birthdate") == null)
 		{
 			client.setBirthdate(null);
 		}
