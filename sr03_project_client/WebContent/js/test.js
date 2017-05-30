@@ -32,7 +32,24 @@ document.addEventListener( 'DOMContentLoaded', function () {
 
 			if(element.classList.contains("AddPanier"))
 				{
-				alert('oui');
+			 	 let father = document.getElementById('GameTable');
+			 	 let div_father=document.getElementById('TableView');
+		 	   let xhr = new XMLHttpRequest();
+			   xhr.open('GET', 'http://localhost:8080/sr03_project_client/AddToPanier?gameId='+element.getAttribute("id"));
+				xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+			   console.log(xhr.readyState);
+			 xhr.addEventListener('readystatechange', function() {
+				   if (xhr.readyState === 4) { 
+		    	    	// La constante DONE appartient à l'objet XMLHttpRequest, elle n'est pas globale
+//				    	 father.innerHTML = father.innerHTML + xhr.responseText;
+				    	 xhr.abort();
+				    	 alert("Ajout effectué");
+
+		    	    }	 
+				});
+//			 console.log(element.getAttribute('id'));
+	    	   xhr.send();
+
 				}
 		});
 	}

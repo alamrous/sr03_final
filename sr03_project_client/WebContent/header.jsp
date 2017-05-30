@@ -22,7 +22,7 @@
              </button>
              </a>
              </li>
-            <li><a href="ClientPanierShow">
+            <li><a href="ShowPanier">
             <button class="btn btn-success">
             Mon panier
             </button></a></li>

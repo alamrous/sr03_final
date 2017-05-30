@@ -3,6 +3,7 @@ package servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.ServletException;
@@ -76,13 +77,16 @@ public class PanierService extends HttpServlet {
 		}
 		
 		//Mise en forme du Panier
-		HashMap<String, Panier[]> panier_map = new HashMap<>();
+		ArrayList<Panier[]> panier_array = new ArrayList<>();
+//		HashMap<String, Panier[]> panier_map = new HashMap<>();
 		Panier[] paniers = PanierManager.getClientPanier(Integer.valueOf(client_id));
-		panier_map.put("Panier", paniers);
+//		panier_map.put("Panier", paniers);
+		panier_array.add(paniers);
 		Panier[] achats = PanierManager.getClientBoughtItem(Integer.valueOf(client_id));
-		panier_map.put("Achats", achats);
+//		panier_map.put("Achats", achats);
+		panier_array.add(achats);
 		ObjectMapper mapper = new ObjectMapper();
-		String data = mapper.writeValueAsString(panier_map);
+		String data = mapper.writeValueAsString(panier_array);
 		response.setContentType("application/json");
 		PrintWriter out = response.getWriter();
 		out.print(data);
