@@ -10,6 +10,7 @@ import java.util.List;
 import org.omg.PortableInterceptor.ServerRequestInfo;
 
 import com.mysql.jdbc.Statement;
+import com.sun.org.apache.xml.internal.serializer.ElemDesc;
 
 import beans.Client;
 public class ClientManager{
@@ -101,9 +102,15 @@ public class ClientManager{
 		statement.setString(4, client.getPwd());
 		statement.setString(5, String.valueOf(client.getGender()));
 		statement.setString(6, client.getEmail());
+		if(client.getBirthdate() != null)
+		{
 	    java.sql.Date sqlDate = new java.sql.Date(client.getBirthdate().getTime());
-
 		statement.setDate(7, sqlDate);
+		}
+		else{
+			statement.setDate(7, null);
+
+		}
 		statement.setString(8, client.getAddress());
 
 
@@ -141,9 +148,14 @@ int res = 0;
 			statement.setString(3, client.getPseudo());
 			statement.setString(4, String.valueOf(client.getGender()));
 			statement.setString(5, client.getEmail());
-		    java.sql.Date sqlDate = new java.sql.Date(client.getBirthdate().getTime());
-
+			if(client.getBirthdate() != null)
+			{ java.sql.Date sqlDate = new java.sql.Date(client.getBirthdate().getTime());
 			statement.setDate(6, sqlDate);
+			}
+			else{
+				statement.setDate(6, null);
+	
+			}
 			statement.setString(7, client.getAddress());
 			statement.setInt(8, client.getId());
 

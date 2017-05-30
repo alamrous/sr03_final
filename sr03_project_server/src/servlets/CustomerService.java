@@ -57,8 +57,8 @@ public class CustomerService extends HttpServlet {
 		{
 			client.setEmail(request.getParameter("email"));
 			client.setPwd(request.getParameter("pwd"));
-		
-		client = ClientManager.selectClientUsingEmailUsingPwd(client.getEmail(), client.getPwd());
+
+			client = ClientManager.selectClientUsingEmailUsingPwd(client.getEmail(), client.getPwd());
 		}
 		ObjectMapper mapper  = new ObjectMapper();
 		String data = mapper.writeValueAsString(client);
@@ -77,35 +77,41 @@ public class CustomerService extends HttpServlet {
 	}
 	private Client addNewClient(HttpServletRequest request, Client client )
 	{
-	client.setName(request.getParameter("name"));
-	client.setFirstname(request.getParameter("firstname"));
-	client.setPseudo(request.getParameter("pseudo"));
-	client.setPwd(request.getParameter("pwd"));
-	client.setAddress(request.getParameter("adress"));
-	client.setEmail(request.getParameter("email"));
-	SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-	Date date;
-	try {
-		date = formatter.parse(request.getParameter("birthdate"));
-		client.setBirthdate(date);
-	} catch (ParseException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-	client.setGender(request.getParameter("gender"));
-	try {
-		ClientManager.insertIntoClient(client);
-	} catch (SQLException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-	client = ClientManager.selectClientUsingEmailUsingPwd(client.getEmail(), client.getPwd());
+		client.setName(request.getParameter("name"));
+		client.setFirstname(request.getParameter("firstname"));
+		client.setPseudo(request.getParameter("pseudo"));
+		client.setPwd(request.getParameter("pwd"));
+		client.setAddress(request.getParameter("adress"));
+		client.setEmail(request.getParameter("email"));
+		if(request.getParameter("birthdate").equals(""))
+		{
+			client.setBirthdate(null);
+		}
+		else{
+		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+		Date date;
+		try {
+			date = formatter.parse(request.getParameter("birthdate"));
+			client.setBirthdate(date);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		}
+		client.setGender(request.getParameter("gender"));
+		try {
+			ClientManager.insertIntoClient(client);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		client = ClientManager.selectClientUsingEmailUsingPwd(client.getEmail(), client.getPwd());
 
 		return client;
 	}
 	private Client updateClient(HttpServletRequest request, Client client){
 		Integer client_id = Integer.valueOf(request.getParameter("id"));
-		
+
 		client = ClientManager.selectClientUsingId(client_id);
 		//Modification des champs
 		if(client.getFirstname() != request.getParameter("firstname")) 
@@ -115,15 +121,22 @@ public class CustomerService extends HttpServlet {
 		if(client.getAddress() != request.getParameter("adress")) 
 			client.setAddress(request.getParameter("adress"));
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-		Date date;
-		try {
-			date = formatter.parse(request.getParameter("birthdate"));
-			if(client.getBirthdate() != date)
-				client.setBirthdate(date);
+		if(request.getParameter("birthdate").equals(""))
+		{
+			client.setBirthdate(null);
+		}
+		
+		if (client.getBirthdate() != null) {
+			Date date;
+			try {
+				date = formatter.parse(request.getParameter("birthdate"));
+				if (client.getBirthdate() != date)
+					client.setBirthdate(date);
 
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
 		}
 		if(client.getEmail() != request.getParameter("email")) 
 			client.setEmail(request.getParameter("email"));

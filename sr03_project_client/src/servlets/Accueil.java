@@ -46,20 +46,18 @@ public class Accueil extends HttpServlet implements APIContact {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		Client client = new Client();
-		client.setId(3);
-		request.getSession().setAttribute("client", client);
+//		Client client = new Client();
+//		client.setId(3);
+//		request.getSession().setAttribute("client", client);
 
         ObjectMapper mapper = new ObjectMapper();
-//        String data = APIContact.getDataFromAPI("http://localhost:8080/sr03_project_server/getGames");
-//           Jeu[] jeu_liste = mapper.readValue(data, Jeu[].class);
-//        request.setAttribute("liste", jeu_liste);
+
         String data = APIContact.getDataFromAPI("http://localhost:8080/sr03_project_server/getFormComponents");
         HashMap<String, String> formComponents = mapper.readValue(data, HashMap.class);
 //        System.out.println(formComponents.get("editeurs"));
 		request.setAttribute("plateformes", formComponents.get("plateformes"));
 		request.setAttribute("editeurs", formComponents.get("editeurs"));
- 	   request.getRequestDispatcher("GamesList.jsp").forward(request, response);
+ 	   request.getRequestDispatcher("Accueil.jsp").forward(request, response);
 
 
 	}

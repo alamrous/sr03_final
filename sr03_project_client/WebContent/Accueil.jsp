@@ -12,7 +12,7 @@
     <%@include file="bootstrap/css/bootstrap-theme.css" %>    
 </style>
 <script type="text/javascript">
-<%@include file="js/test.js"%>
+<%@include file="js/accueil.js"%>
 
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">

@@ -38,21 +38,26 @@ public class ShowPanier extends HttpServlet {
 		// TODO Auto-generated method stub
 	      ObjectMapper mapper = new ObjectMapper();	 
 	      Client client = (Client) request.getSession().getAttribute("client");
-
-	        String data = APIContact.getDataFromAPI("http://localhost:8080/sr03_project_server/Panier?client="+client.getId());
-			ArrayList panier_map = (ArrayList) mapper.readValue(data,Panier[].class);
-			Panier[] paniers =  (Panier[]) panier_map.get(0);
+	        String data = APIContact.getDataFromAPI("http://localhost:8080/sr03_project_server/Panier?object=Panier&client="+client.getId());
+			Panier[]paniers = (Panier[]) mapper.readValue(data,Panier[].class);
 			request.getSession().setAttribute("panier", paniers);
-			request.getSession().setAttribute("achats",(Panier[]) panier_map.get(1));
-
+			if(paniers.length == 0)		
+				request.getSession().setAttribute("total", 0);
 
 			if(paniers.length >=1){
-			double total =0 ;
-			for (int i = 0; i < paniers.length; i++) {
-				total = total + paniers[i].getJeu().getPrix();
-			}
-			request.getSession().setAttribute("total", total);
-			}
+				double total =0 ;
+				for (int i = 0; i < paniers.length; i++) {
+					total = total + paniers[i].getJeu().getPrix();
+				}
+				request.getSession().setAttribute("total", total);
+				}
+			
+	         data = APIContact.getDataFromAPI("http://localhost:8080/sr03_project_server/Panier?object=Achats&client="+client.getId());
+			paniers = (Panier[]) mapper.readValue(data,Panier[].class);
+			request.getSession().setAttribute("achats", paniers);
+
+
+			
 			
 	
 			request.getRequestDispatcher("PanierView.jsp").forward(request, response);

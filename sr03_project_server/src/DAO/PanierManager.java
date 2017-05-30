@@ -53,7 +53,8 @@ public class PanierManager {
 				+ " INNER JOIN test.Jeu_Plateforme ON  test.Jeu_Plateforme.id = test.Panier.plateforme_jeu_fk "
 				+ " INNER JOIN  test.Plateforme ON test.Plateforme.id = test.Jeu_Plateforme.plateforme_fk "
 				+ " INNER JOIN test.Jeu ON test.Jeu.id=test.Jeu_Plateforme.jeu_fk "
-				+ " WHERE test.Panier.client_fk = ? AND test.Panier.etat_achat_fk = ?";
+				+ " WHERE test.Panier.client_fk = ? AND test.Panier.etat_achat_fk = ?"
+				+ " ORDER BY Panier.id DESC";
 		Connection connection =  mysqlConnect.connect();
 			try {
 				PreparedStatement statement=	connection.prepareStatement(sql);
