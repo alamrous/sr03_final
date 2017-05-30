@@ -39,10 +39,17 @@ for (i=0; i<liste.length; i++){
 	<td><%=  liste[i].getPrix()%></td>
 	<% if(request.getSession().getAttribute("client") != null){ %>
 <td>
-<!--  <form action="PanierAction" method="post"> -->
-<%-- <input type="hidden" name="productId" value="<%= liste[i].getPlateforme_jeu_fk()%>"> --%>
+<div class="col col-md-5">
 <button class="btn btn-success AddPanier" id="<%= liste[i].getPlateforme_jeu_fk()%>">Ajouter</button>
-<!-- </form>  -->
+</div>
+<div class="col col-md-5">
+
+ <form action="Game" method="GET">
+<input type="hidden" name="id" value="<%= liste[i].getPlateforme_jeu_fk()%>">
+<input type="submit" class="btn btn-info" value="Details"></button>
+</form> 
+</div>
+
 </td>
 <%} %>
 </tr> 

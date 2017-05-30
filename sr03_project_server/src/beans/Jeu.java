@@ -1,5 +1,6 @@
 package beans;
 
+import java.util.Date;
 
 public class Jeu {
 private Integer id;
@@ -11,6 +12,7 @@ private Editeur fk_editeur;
 private Integer plateforme_jeu_fk;
 private Plateforme plateforme;
 private double prix;
+private Date date_sortie;
 public Jeu() {
 	
 	super();
@@ -79,6 +81,12 @@ public Integer getPlateforme_jeu_fk() {
 }
 public void setPlateforme_jeu_fk(Integer plateforme_jeu_fk) {
 	this.plateforme_jeu_fk = plateforme_jeu_fk;
+}
+public Date getDate_sortie() {
+	return date_sortie;
+}
+public void setDate_sortie(Date date_sortie) {
+	this.date_sortie = date_sortie;
 }
 
 }
