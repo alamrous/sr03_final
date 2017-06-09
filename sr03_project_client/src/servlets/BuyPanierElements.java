@@ -34,7 +34,8 @@ public class BuyPanierElements extends HttpServlet {
 		String client =((Client) request.getSession().getAttribute("client")).getId().toString();
 	      ObjectMapper mapper = new ObjectMapper();
 	      String data = APIContact.getDataFromAPI("http://localhost:8080/sr03_project_server/Panier?action=buy&client="+client);
-	  	   request.getRequestDispatcher("ShowPanier").forward(request, response);
+	  	  response.sendRedirect("ShowPanier"); 
+//	      request.getRequestDispatcher("ShowPanier").forward(request, response);
 
 	}
 

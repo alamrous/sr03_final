@@ -66,8 +66,11 @@ document.addEventListener( 'DOMContentLoaded', function () {
 		    	    	// La constante DONE appartient à l'objet XMLHttpRequest, elle n'est pas globale
 //				    	 father.innerHTML = father.innerHTML + xhr.responseText;
 				    	 xhr.abort();
-				    	 alert("Ajout effectué");
+				    	 document.querySelectorAll("#AddNotif")[0].style.display ="block";
+				    	 setTimeout(function(){
+					    	 document.querySelectorAll("#AddNotif")[0].style.display ="none";
 
+				    	 }, 2000);
 		    	    }	 
 				});
 //			 console.log(element.getAttribute('id'));

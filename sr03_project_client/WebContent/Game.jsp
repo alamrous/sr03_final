@@ -10,7 +10,10 @@
     <%@include file="bootstrap/css/bootstrap.css" %>
     <%@include file="bootstrap/css/bootstrap-theme.css" %>    
 </style>
-<title>Edition Compte</title>
+<script type="text/javascript">
+<%@include file="js/details.js"%>
+</script>
+<title>Détails jeu</title>
 </head>
 <body style="padding: 70px">
 <%@ include file="header.jsp"%>
@@ -30,6 +33,11 @@
 </td>
 </tr>
 <tr>
+<th>Résumé</th>
+<td style="    width: 100%;    text-align: center;"> 
+<%= jeu.getSummary() %></td>
+</tr>
+<tr>
 <th>Editeur</th>
 <td style="    width: 100%;    text-align: center;"> 
 <%= jeu.getFk_editeur().getDescription() %>(<%=jeu.getFk_editeur().getCountry_fk().getNom() %>)
@@ -47,12 +55,21 @@
 <%= jeu.getPrix() %>€</td>
 </tr>
 <tr>
-<th></th>
+<th>Note de la rédaction</th>
+<td style="    width: 100%;    text-align: center;color: 
+<%if(jeu.getNote()<10){ %>red<%}else if(jeu.getNote()<15){ %> orange<%}else{ %> green<%} %>" > 
+<%= jeu.getNote() %> / 20
+</td>
+</tr>
+<% if(request.getSession().getAttribute("client") != null){ %>
+<tr>
+<th></th>	
 <td style="    width: 100%;    text-align: right;"> 
 <button class="btn btn-success AddPanier" id="<%= jeu.getPlateforme_jeu_fk()%>">Ajouter</button>
 
 </td>
 </tr>
+<%} %>
     </table>
     
 

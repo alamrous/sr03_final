@@ -75,9 +75,10 @@ F  </label>
 </div>
 
 <br/>
-<input type="submit" value="M'enregistrer" class="btn btn-lg btn-primary btn-block"/>
+<input type="submit" value="M'enregistrer" class="btn btn-lg btn-primary btn-block" style="display: none;"/>
 </form>
-
+<button class="btn btn-lg btn-primary btn-block" id="Submit" style="display: block;">M'enregistrer</button>
+<div class="row alert alert-danger" id="EmailNotif"style="text-align: center; display: none"><strong>Email deja utilisée</strong></div>
 </div>
 </div>
 </body>

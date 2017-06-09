@@ -29,12 +29,12 @@ import beans.Client;
 import beans.Editeur;
 import beans.Jeu;
 import beans.Plateforme;
-import javafx.scene.chart.PieChart.Data;
 
 /**
  * Servlet implementation class GameController
  */
 @WebServlet("/getGames")
+
 public class GameService extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

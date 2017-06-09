@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sun.jmx.snmp.SnmpStringFixed;
 import com.sun.org.apache.bcel.internal.generic.AALOAD;
 
 import DAO.ClientManager;

@@ -50,6 +50,25 @@ public class ClientManager{
 		return null;
 		
 	}
+	public static Integer selectClientUsingEmail(String email){
+		ConnexionBDD mysqlConnect = new ConnexionBDD();
+		String sql = "SELECT Client.id FROM test.Client WHERE email = ?";
+		Connection connection = mysqlConnect.connect();
+		try {
+			PreparedStatement statement=	connection.prepareStatement(sql);
+			statement.setString(1, email);
+			ResultSet res = statement.executeQuery();
+			if(res.next()) {
+					return res.getInt("id");
+			}
+		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+		
+	}
 	public static Client selectClientUsingId(Integer id){
 		Client client;
 		ConnexionBDD mysqlConnect = new ConnexionBDD();
