@@ -22,7 +22,7 @@
 <h1>Détails de <%= jeu.getTitle() %> (<%= jeu.getPlateforme().getName() %>)</h1>
 <div class="row">
 <div class="col-md-3">
-<img src=""/>
+<img src="<%=jeu.getImg_url()%>" style="    max-height: 250px;    max-width: initial;    border-radius: 10%;"/>
 </div>
 <div class="col-md-5" style="    border-radius: 10px;    background-color: rgba(220, 220, 220, 0.56);">
     <table style="border-collapse: separate;border-spacing:0 10px;">

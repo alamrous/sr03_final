@@ -21,13 +21,14 @@ public static ArrayList<Jeu> getAllGame(){
 	ArrayList<Jeu> liste = new ArrayList<Jeu>();
 	ConnexionBDD mysqlConnect = new ConnexionBDD();
 	String sql = "SELECT test.Jeu.*, test.Pegi.description AS Pegi_description, test.Editeur.nom AS Editeur_name, test.Pays.nom AS Country_name, "
-			+ " Jeu_Plateforme.prix as Prix, Jeu_Plateforme.id,Plateforme.nom as plat_name "
+			+ " Jeu_Plateforme.img_url,Jeu_Plateforme.prix as Prix, Jeu_Plateforme.id,Plateforme.nom as plat_name "
 			+ " FROM test.Jeu"
 			+ " INNER JOIN test.Jeu_Plateforme ON test.Jeu_Plateforme.jeu_fk = test.Jeu.id"
 			+ " INNER JOIN test.Plateforme ON test.Jeu_Plateforme.plateforme_fk=test.Plateforme.id"
 			+ " INNER JOIN test.Pegi ON test.Pegi.id=test.Jeu.pegi_fk"
 			+ " INNER  JOIN test.Editeur ON test.Editeur.id=test.Jeu.editeur_fk"
 			+ " iNNER  JOIN test.Pays ON test.Pays.id=test.Editeur.country_fk" ;
+	System.out.println(sql);
 	try {
 	Connection connection =  mysqlConnect.connect();
 	PreparedStatement statement=	connection.prepareStatement(sql);
@@ -58,6 +59,7 @@ public static ArrayList<Jeu> getAllGame(){
 		jeu.setSummary(res.getString("summary"));
 		jeu.setTitle(res.getString("title"));
 		jeu.setPlateforme(plateforme);
+		jeu.setImg_url(res.getString("img_url"));
 		jeu.setPlateforme_jeu_fk(res.getInt("Jeu_Plateforme.id"));
 		liste.add(jeu);
 //	(Integer id, String title, Integer fk_pegi, Double note, String summary, Integer fk_editeur)
@@ -76,7 +78,7 @@ public static ArrayList<Jeu> getAllGame(){
 public static Jeu getGameUsingId(Integer valueOf) {
 	ConnexionBDD mysqlConnect = new ConnexionBDD();
 	String sql = "SELECT test.Jeu.*, test.Pegi.description AS Pegi_description, test.Editeur.nom AS Editeur_name, test.Pays.nom AS Country_name, "
-			+ " Jeu_Plateforme.prix as Prix, Jeu_Plateforme.id,Plateforme.nom as plat_name, Jeu_Plateforme.date_sortie "
+			+ "  Jeu_Plateforme.img_url,Jeu_Plateforme.prix as Prix,Jeu_Plateforme.img_url, Jeu_Plateforme.id,Plateforme.nom as plat_name, Jeu_Plateforme.date_sortie "
 			+ " FROM test.Jeu"
 			+ " INNER JOIN test.Jeu_Plateforme ON test.Jeu_Plateforme.jeu_fk = test.Jeu.id"
 			+ " INNER JOIN test.Plateforme ON test.Jeu_Plateforme.plateforme_fk=test.Plateforme.id"
@@ -118,7 +120,10 @@ try {
 		jeu.setTitle(res.getString("title"));
 		jeu.setPlateforme(plateforme);
 		jeu.setPlateforme_jeu_fk(res.getInt("Jeu_Plateforme.id"));
+		jeu.setImg_url(res.getString("Jeu_Plateforme.img_url"));
 		jeu.setDate_sortie(res.getDate("date_sortie"));
+		jeu.setImg_url(res.getString("img_url"));
+
 		}
 return jeu;
 	
@@ -138,7 +143,7 @@ public static ArrayList<Jeu> getGameUsingFields(String title, Integer plateform,
 	ConnexionBDD mysqlConnect = new ConnexionBDD();
 	Connection connection =  mysqlConnect.connect();
 	String sql = "SELECT test.Jeu.*, test.Pegi.description AS Pegi_description, test.Editeur.nom AS Editeur_name, test.Pays.nom AS Country_name, "
-			+ " Jeu_Plateforme.prix as Prix, Jeu_Plateforme.id,Plateforme.nom as plat_name "
+			+ "  Jeu_Plateforme.img_url,Jeu_Plateforme.prix as Prix, Jeu_Plateforme.id,Plateforme.nom as plat_name "
 			+ " FROM test.Jeu"
 			+ " INNER JOIN test.Jeu_Plateforme ON test.Jeu_Plateforme.jeu_fk = test.Jeu.id"
 			+ " INNER JOIN test.Plateforme ON test.Jeu_Plateforme.plateforme_fk=test.Plateforme.id"
@@ -225,6 +230,8 @@ public static ArrayList<Jeu> getGameUsingFields(String title, Integer plateform,
 				jeu.setTitle(res.getString("title"));
 				jeu.setPlateforme(plateforme);
 				jeu.setPlateforme_jeu_fk(res.getInt("Jeu_Plateforme.id"));
+				jeu.setImg_url(res.getString("img_url"));
+
 				liste.add(jeu);
 			}
 			System.out.println(liste);

@@ -35,7 +35,7 @@
 <span style="color :green;visibility: hidden" id="pwdOk">Password Ok </span>
 
 </label>
-<input type="text" name="pwd" class="form-control"/>
+<input type="password" name="pwd" class="form-control"/>
 <span style="color :red;visibility: hidden" id="pwd"> Le mot de passe doit contenir au moins une majuscule et un chiffre </span>
 
 <br/>
