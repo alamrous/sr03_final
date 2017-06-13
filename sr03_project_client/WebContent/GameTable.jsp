@@ -1,60 +1,51 @@
 <%@page import="beans.Jeu"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <tr>
-<th>Titre</th>
-<th>Pegi</th>
-<th>Note</th>
-<th>Editeur</th>	
-<th>Pays</th>
-<th>Plateforme</th>
-<th>Prix</th>
-<% if(request.getSession().getAttribute("client") != null){ %>
-<th> Action </th>
-<%} %>
-</tr> 
-<% 
-try{
-Jeu[] liste = (Jeu[])request.getAttribute("liste"); 
-}
+	pageEncoding="UTF-8"%>
+<%
+	Jeu[] liste = (Jeu[]) request.getAttribute("liste");
 
-catch(Exception e){
- System.out.print(e.toString());	
-}
-Jeu[] liste = (Jeu[])request.getAttribute("liste"); 
+	int i = 0;
+	for (i = 0; i < liste.length; i++) {
 %>
-<% int  i = 0; 
-for (i=0; i<liste.length; i++){
-	%><tr>
-	<td>
-	<%=
-	liste[i].getTitle()
-	%>
-	</td>
-	<td><%=  liste[i].getFk_pegi().getDescription()%></td>
-	<td><%=  liste[i].getNote()%></td>
-	<td><%=  liste[i].getFk_editeur().getDescription()%></td>
-	<td><%=  liste[i].getFk_editeur().getCountry_fk().getNom()%></td>
-	<td><%=  liste[i].getPlateforme().getName()%></td>
-	<td><%=  liste[i].getPrix()%></td>
-	<% if(request.getSession().getAttribute("client") != null){ %>
-<td>
-<div class="col col-md-5">
-<button class="btn btn-success AddPanier" id="<%= liste[i].getPlateforme_jeu_fk()%>">Ajouter</button>
-</div>
-<div class="col col-md-5">
+<div class="card"
+	style="border: 1px solid grey; width: 20rem; margin-right: 5%; margin-left: 1%; margin-bottom: 5%; border-radius: 5%; overflow-x: hidden; display: inline-block;">
+	<img class="card-img-top" src="<%=liste[i].getImg_url()%>"
+		alt="Card image cap" style="width: 200px; height: 200px;">
+	<div class="card-block">
+		<h4 class="card-title" style="color: #286090;margin-left: 2%;"><%=liste[i].getTitle()%>
+		<span class="badge badge-info" style="background-color: #286090;margin: auto 0;"><%=liste[i].getPrix()%>
+				€ </span>
+		</h4>
+	</div>
 
- <form action="Game" method="GET">
-<input type="hidden" name="id" value="<%= liste[i].getPlateforme_jeu_fk()%>">
-<input type="submit" class="btn btn-info" value="Details"></button>
-</form> 
-</div>
+	<ul class="list-group list-group-flush" style="display: inline;">
+		<li class="list-group-item">
+			<p>
+				<%=liste[i].getPlateforme().getName()%>
+				<span class="badge badge-warning" style="background-color: #f0ad4e;"><%=liste[i].getFk_pegi().getDescription()%></span>
 
-</td>
-<%} %>
-</tr> 
-						
-			
-			
-	</tr>
+			</p>
+			<p>
+				<%=liste[i].getFk_editeur().getDescription()%>(<%=liste[i].getFk_editeur().getCountry_fk().getNom()%>)
+			</p>
+		</li>
+
+
+	</ul>
+
+	<div class="card-block" style="    text-align: center;    margin-bottom: 5%;    margin-top: 5%;">
+		<%
+			if (request.getSession().getAttribute("client") != null) {
+		%>
+		<button class="btn btn-success AddPanier" style="margin-right: 10%;"
+			id="<%=liste[i].getPlateforme_jeu_fk()%>">Ajouter</button>
+		<form action="Game" method="GET" style="    display: inline;">
+			<input type="hidden" name="id"
+				value="<%=liste[i].getPlateforme_jeu_fk()%>"> <input
+				type="submit" class="btn btn-info" value="Details">
+			</button>
+		</form>
+		<%} %>
+	</div>
+</div>
 <% } %>

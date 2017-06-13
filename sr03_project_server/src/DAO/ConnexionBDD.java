@@ -9,7 +9,7 @@ import java.util.Properties;
 
 
 public final class ConnexionBDD { private static final String DATABASE_DRIVER = "com.mysql.jdbc.Driver";
-private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/test";
+private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/test?useSSL=false";
 private static final String USERNAME = "java";
 private static final String PASSWORD = "password";
 private static final String MAX_POOL = "250";
@@ -32,7 +32,7 @@ public Connection connect() {
 
         try {
 			conn = DriverManager.getConnection(
-			           "jdbc:mysql://localhost:3306/test",
+			           "jdbc:mysql://localhost:3306/test?useSSL=false",
 			           connectionProps);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

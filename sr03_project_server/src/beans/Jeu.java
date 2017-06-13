@@ -13,6 +13,8 @@ private Integer plateforme_jeu_fk;
 private Plateforme plateforme;
 private double prix;
 private Date date_sortie;
+private String img_url;
+
 public Jeu() {
 	
 	super();
@@ -87,6 +89,12 @@ public Date getDate_sortie() {
 }
 public void setDate_sortie(Date date_sortie) {
 	this.date_sortie = date_sortie;
+}
+public String getImg_url() {
+	return img_url;
+}
+public void setImg_url(String img_url) {
+	this.img_url = img_url;
 }
 
 }

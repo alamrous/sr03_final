@@ -9,6 +9,9 @@
     <%@include file="bootstrap/css/bootstrap.css" %>
     <%@include file="bootstrap/css/bootstrap-theme.css" %>    
 </style>
+<script type="text/javascript">
+<%@include file="js/editProfile.js"%>
+</script>
 <title>Edition Compte</title>
 </head>
 <body style="padding: 70px">
@@ -20,11 +23,13 @@
 <div class="row">
 <div class="col-md-5 col-md-offset-3">
 <form action="EditProfile" method="GET">
-<label>Name</label>
+<label>Name</label><span style="color :green;visibility: hidden" id="nameOk">Name Ok</span>
+
 <input type="text" name="name" 
 <%if(client.getName().equals("") == false){%>value="<%= client.getName()%>"<%} %>class="form-control"/>
-<br/>
 <label>FirstName</label>
+<span style="color :green;visibility: hidden" id="firstnameOk">FirstName Ok</span>
+
 <input type="text" name="firstname"
 <%if(client.getFirstname().equals("") == false){%>value="<%= client.getFirstname()%>"<%} %> class="form-control" />
 <br/>
@@ -36,9 +41,14 @@ class="form-control"/>
 <input type="text" name="adress" 
 <%if(client.getAddress().equals("") == false){%>value="<%= client.getAddress()%>"<%} %>
 class="form-control"/>
-<br/>
-<label>Email</label>
+
+
+<label>Email</label><span style="color :green;visibility: hidden" id="emailOk">Email Ok</span>
+
 <input type="text" name="email" value="<%=client.getEmail()%>" class="form-control"/>
+<br/>
+<span style="color :red; visibility: hidden"  id="email"> Format incorrect de l'email</span>
+
 <br/>
 <label>Date de naissance</label>
 <input type="text" name="birthdate" <%if(client.getBirthdate() != null){%>value="<%= client.getBirthdate()%>"<%} %> class="form-control"/>

@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringEscapeUtils;
 import org.jboss.resteasy.plugins.server.servlet.Cleanable;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -29,12 +30,12 @@ import beans.Client;
 import beans.Editeur;
 import beans.Jeu;
 import beans.Plateforme;
-import javafx.scene.chart.PieChart.Data;
 
 /**
  * Servlet implementation class GameController
  */
 @WebServlet("/getGames")
+
 public class GameService extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -56,7 +57,7 @@ public class GameService extends HttpServlet {
 		if(request.getParameter("action") == null)
 		liste = GameManager.getAllGame();
 		else{
-			String title=  request.getParameter("title");
+			String title=  StringEscapeUtils.escapeHtml(request.getParameter("title"));
 			Integer plateform= (request.getParameter("plateforme") == null)?null: Integer.valueOf(request.getParameter("plateforme"));
 			Double priceMin= (request.getParameter("minPrice") == null)?null: Double.valueOf(request.getParameter("minPrice"));
 			Double priceMax= (request.getParameter("maxPrice") == null)?null: Double.valueOf(request.getParameter("maxPrice"));
@@ -65,7 +66,7 @@ public class GameService extends HttpServlet {
 			if(request.getParameter("year") != null){
 				try {
 					SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-					year = formatter.parse(request.getParameter("year"));
+					year = formatter.parse(StringEscapeUtils.escapeHtml(request.getParameter("year")));
 
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block

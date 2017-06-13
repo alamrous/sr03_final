@@ -13,7 +13,6 @@
 </style>
 <script type="text/javascript">
 <%@include file="js/accueil.js"%>
-
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
@@ -68,10 +67,14 @@
 
 </div>
 <div class="col-md-8" id="TableView">
+<div class="row alert alert-success" style="display:none; text-align:center;" id="AddNotif"><strong>Ajout de l'article au Panier</strong></div>
 <h2>Liste des jeux</h2>
-<table class="table" id="GameTable">
+<!-- <table class="table" id="GameTable"> -->
+<!-- </table> -->
+<div class="row" id="GameTable">
 
-</table></div>
+</div>
+</div>
 </div>
 </div>
 </div>

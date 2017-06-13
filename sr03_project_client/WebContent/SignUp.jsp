@@ -35,7 +35,7 @@
 <span style="color :green;visibility: hidden" id="pwdOk">Password Ok </span>
 
 </label>
-<input type="text" name="pwd" class="form-control"/>
+<input type="password" name="pwd" class="form-control"/>
 <span style="color :red;visibility: hidden" id="pwd"> Le mot de passe doit contenir au moins une majuscule et un chiffre </span>
 
 <br/>
@@ -75,9 +75,10 @@ F  </label>
 </div>
 
 <br/>
-<input type="submit" value="M'enregistrer" class="btn btn-lg btn-primary btn-block"/>
+<input type="submit" value="M'enregistrer" class="btn btn-lg btn-primary btn-block" style="display: none;"/>
 </form>
-
+<button class="btn btn-lg btn-primary btn-block" id="Submit" style="display: block;">M'enregistrer</button>
+<div class="row alert alert-danger" id="EmailNotif"style="text-align: center; display: none"><strong>Email deja utilisée</strong></div>
 </div>
 </div>
 </body>

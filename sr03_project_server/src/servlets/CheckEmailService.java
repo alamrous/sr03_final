@@ -1,6 +1,8 @@
 package servlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,19 +11,20 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import DAO.ClientManager;
 import beans.Client;
 
 /**
- * Servlet implementation class RemoveFromPanier
+ * Servlet implementation class CheckClientEmail
  */
-@WebServlet("/RemoveFromPanier")
-public class RemoveFromPanier extends HttpServlet {
+@WebServlet("/Email")
+public class CheckEmailService extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RemoveFromPanier() {
+    public CheckEmailService() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,17 +34,12 @@ public class RemoveFromPanier extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String panier_id = request.getParameter("item_id");
-        String data = APIContact.getDataFromAPI("http://localhost:8080/sr03_project_server/"
-        		+ "Panier?action=delete&item_id="+panier_id);
-        ObjectMapper mapper= new ObjectMapper();
-        boolean res = mapper.readValue(data, boolean.class);
-        if(res)
-        {
-  	  	  response.sendRedirect("ShowPanier"); 
-
-        }
-
+		String email = request.getParameter("email");
+		Integer id = ClientManager.selectClientUsingEmail(email);
+		String res = (id != null)? "true":"false";
+		PrintWriter out = response.getWriter();
+		out.print(res);
+		out.flush();
 	}
 
 	/**

@@ -39,7 +39,9 @@ public class ConnectClient extends HttpServlet {
 	           Client client = mapper.readValue(data, Client.class);
 	           request.getSession().setAttribute("client", client);
 //	        request.setAttribute("liste", jeu_liste);
-	  	   request.getRequestDispatcher("Accueil").forward(request, response);
+		        response.sendRedirect("Accueil");
+
+//	  	   request.getRequestDispatcher("Accueil").forward(request, response);
 		}
 
 	/**
