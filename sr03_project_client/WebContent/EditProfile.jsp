@@ -51,7 +51,7 @@ class="form-control"/>
 
 <br/>
 <label>Date de naissance</label>
-<input type="text" name="birthdate" <%if(client.getBirthdate() != null){%>value="<%= client.getBirthdate()%>"<%} %> class="form-control"/>
+<input type="date" name="birthdate" <%if(client.getBirthdate() != null){%>value="<%= client.getBirhtdateInFormatForm()%>"<%} %> class="form-control"/>
 <br/>
 <label>Sexe</label>
 <label>M</label>

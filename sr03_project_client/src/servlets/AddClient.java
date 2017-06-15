@@ -42,7 +42,9 @@ public class AddClient extends HttpServlet {
 	        ObjectMapper mapper= new ObjectMapper();
 	        Client client = (Client) mapper.readValue(data, Client.class);
 	        request.getSession().setAttribute("client", client);
-	        request.getRequestDispatcher("Accueil").forward(request, response);
+//	        request.getRequestDispatcher("Accueil").forward(request, response);
+		  	  response.sendRedirect("Accueil"); 
+
 	}
 
 	/**

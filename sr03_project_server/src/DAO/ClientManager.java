@@ -191,6 +191,35 @@ int res = 0;
 		}
 
 	}
+	public static void updateClientPwd(Integer client_id, String hashMdp) {
+		// TODO Auto-generated method stub
+		ConnexionBDD mysqlConnect = new ConnexionBDD();
+		String sql = "UPDATE `test`.`Client` "
+				+ "SET `pwd` = ? "
+				+ " WHERE id= ? ; ";
+		try {
+	  Connection connection =  mysqlConnect.connect();
+
+	  //Execution et traitement de la réponse
+		PreparedStatement statement;
+		try {
+			statement = connection.prepareStatement(sql);
+			statement.setString(1, hashMdp);
+			statement.setInt(2, client_id);
+			
+
+			System.out.println(statement);
+			statement.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+		}
+		finally {
+		    mysqlConnect.disconnect();
+		}
+	}
 	
 	
 

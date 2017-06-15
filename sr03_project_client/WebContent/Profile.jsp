@@ -1,3 +1,4 @@
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="beans.Client"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -19,7 +20,7 @@
 <h1> Mes informations</h1>
 <div class="row">
 <div class="col-md-5 col-md-offset-6">
-<a href="ChangePwd" method="POST">
+<a href="EditPwd" method="POST">
 <button class="btn btn-primary">
 Modifier le mot de passe
 </button>
@@ -58,7 +59,7 @@ Editer Mon Profil
 </tr>
 <tr>
 <th>Date de naissance</th>
-<td><% if(client.getBirthdate() != null)%><%=client.getBirthdate()%><%else {%>Non défini<%}%></td>
+<td><% if(client.getBirthdate() != null)%><%=client.getBirhtdateInStringFormat()%><%else {%>Non défini<%}%></td>
 </tr>
 <tr>
 <th>Adresse</th>

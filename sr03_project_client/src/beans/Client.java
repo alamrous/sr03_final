@@ -1,6 +1,8 @@
 package beans;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.concurrent.BlockingDeque;
 
 
 public class Client {
@@ -103,6 +105,14 @@ public void setAddress(String address) {
 public void setGender(String string) {
 	// TODO Auto-generated method stub
 	this.gender = string.toCharArray()[0];
+}
+public String getBirhtdateInStringFormat(){
+return new SimpleDateFormat("dd-MM-yyyy").format(this.getBirthdate());
+
+}
+public String getBirhtdateInFormatForm(){
+return new SimpleDateFormat("yyyy-MM-dd").format(this.getBirthdate());
+
 }
 
 

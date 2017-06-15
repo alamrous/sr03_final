@@ -13,11 +13,11 @@ document.addEventListener( 'DOMContentLoaded', function () {
 		   document.querySelectorAll('#SearchBar')[0].addEventListener("change",function(){
 			   let title = document.querySelectorAll('[name="title"]')[0].value
 		       let plateforme = document.querySelectorAll('[name="plateforme"]')[0].value
-		       let year = document.querySelectorAll('[name="year"]')[0].value
+//		       let year = document.querySelectorAll('[name="year"]')[0].value
 		       let minPrice = document.querySelectorAll('[name="minPrice"]')[0].value
 		       let maxPrice = document.querySelectorAll('[name="maxPrice"]')[0].value
 		       let editeur = document.querySelectorAll('[name="editeur"]')[0].value
-		       if(title != "" ||plateforme != "" ||year != ""||minPrice != "" ||maxPrice != "" ||editeur != "" ){
+		       if(title != "" ||plateforme != "" ||minPrice != "" ||maxPrice != "" ||editeur != "" ){
 		    	   document.querySelectorAll('#searchGame')[0].disabled = false;
 		       }
 		       else
@@ -86,7 +86,7 @@ document.addEventListener( 'DOMContentLoaded', function () {
 
 	       let title = document.querySelectorAll('[name="title"]')[0].value
 	       let plateforme = document.querySelectorAll('[name="plateforme"]')[0].value
-	       let year = document.querySelectorAll('[name="year"]')[0].value
+//	       let year = document.querySelectorAll('[name="year"]')[0].value
 	       let minPrice = document.querySelectorAll('[name="minPrice"]')[0].value
 	       let maxPrice = document.querySelectorAll('[name="maxPrice"]')[0].value
 	       let editeur = document.querySelectorAll('[name="editeur"]')[0].value
@@ -94,7 +94,7 @@ document.addEventListener( 'DOMContentLoaded', function () {
 	       let query = "";
 	       if(title != "") query = "?title="+title;
 	       if(plateforme != "") query = (query == "")?"?plateforme="+plateforme:query+"&plateforme="+plateforme;
-	       if(year != "") query = (query == "")?"?year="+year:query+"&year="+year;
+//	       if(year != "") query = (query == "")?"?year="+year:query+"&year="+year;
 	       if(minPrice != "") query = (query == "")?"?minPrice="+minPrice:query+"&minPrice="+minPrice;
 	       if(maxPrice != "") query = (query == "")?"?maxPrice="+maxPrice:query+"&maxPrice="+maxPrice;
 	       if(editeur != "") query = (query == "")?"?editeur="+editeur:query+"&editeur="+editeur;

@@ -16,21 +16,24 @@
 <%@ include file="header.jsp"%>
 
 <body style="padding: 70px">
+<div class="well well-lg">
 <h1> S'authentifier</h1>
 <div class="row alert alert-danger" id="EmailNotif"style="text-align: center; display: none"><strong>Email ou Pwd erronés</strong></div>
 <div class="row">
-<div class="col-md-3 col-md-offset-4" style="background-color: #e8e8e8;border-radius: 10px;padding-top: 30px;padding-bottom: 50px;">
+<div class="col-md-3 col-md-offset-4"
+style="background-color: #ccc;text-align: center;border-radius: 10px;padding-top: 30px;padding-bottom: 50px;">
 <form action="ConnectClient" method="get">
 <label>Email</label>
-<input type="text" name="email" class="form-control"/>
+<input type="text" name="email" class="form-control" placeholder="Entrer l'email"/>
 <br/>
 <label>Password</label>
-<input type="password" name="pwd" class="form-control"/>
+<input type="password" name="pwd" class="form-control" placeholder="Entrer le mot de passe"/>
 <br/>
 <input type="submit" class="form-control btn btn-primary" value="Connexion"  style="display: none;"/>
 </form>
-<button class="btn btn-primary" id="Connect">Connexion</button>
+<button class="btn btn-success" id="Connect">Connexion</button>
 
+</div>
 </div>
 </div>
 </body>
