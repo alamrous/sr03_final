@@ -14,13 +14,22 @@
 </head>
 <%@ include file="header.jsp"%>
 <body style="padding-top: 70px;">
-<% Client client = (Client) request.getSession().getAttribute("client"); %>
 <!-- <a href="ClientPanierShow">Mes achats</a> -->
 <!-- <a href="ClientPanierShow">Mon Panier</a> -->
 <h1> Mes informations</h1>
-<div class="row">
-<div class="col-md-5 col-md-offset-6">
-<a href="EditPwd" method="POST">
+
+<div class="row" >
+<div class="col-md-3">
+<img src="http://www.slate.com/content/dam/slate/blogs/moneybox/2014/12/15/the_russian_ruble_is_in_freefall_thanks_north_dakota/145536434-russian-president-vladimir-putin-speaks-during-a-press.jpg.CROP.promo-mediumlarge.jpg" style="width: 200px;height: 200px;margin-left: 5%;border-radius: 50%;">
+</div>
+<div class="col-md-3" style="
+    border-radius: 10px;
+    background-color: rgba(220, 220, 220, 0.56);" id="ProfilDiv">
+    <%@include file="ProfileContent.jsp" %>
+
+</div>
+<div class="col-md-5" style="display: flex;flex-direction: column-reverse;">
+<a href="EditPwd.jsp" method="POST" style="margin-top: 10px;">
 <button class="btn btn-primary">
 Modifier le mot de passe
 </button>
@@ -30,43 +39,6 @@ Modifier le mot de passe
 Editer Mon Profil
 </button>
 </a>
-</div>
-</div>
-<div class="row">
-<div class="col-md-3 col-md-offset-3" style="
-    border-radius: 10px;
-    background-color: rgba(220, 220, 220, 0.56);">
-<table style="border-collapse: separate;border-spacing:0 5px;">
-<tr>
-<th>Nom</th>
-<td><% if(client.getName().equals("") == false)%><%=client.getName()%><%else {%>Non défini<%}%></td>
-</tr>
-<tr>
-<th>Prénom</th>
-<td><% if(client.getFirstname().equals("") == false)%><%=client.getFirstname()%><%else {%>Non défini<%}%></td>
-</tr>
-<tr>
-<th>Email</th>
-<td><%= client.getEmail() %></td>
-</tr>
-<tr>
-<th>Pseudo</th>
-<td><% if(client.getPseudo() != null && client.getPseudo().equals("") == false)%><%=client.getPseudo()%><%else {%>Non défini<%}%></td>
-</tr>
-<tr>
-<th>Sexe</th>
-<td><%= client.getGender() %></td>
-</tr>
-<tr>
-<th>Date de naissance</th>
-<td><% if(client.getBirthdate() != null)%><%=client.getBirhtdateInStringFormat()%><%else {%>Non défini<%}%></td>
-</tr>
-<tr>
-<th>Adresse</th>
-<td><% if(client.getAddress() != null && client.getAddress().equals("") == false)%><%=client.getAddress()%><%else {%>Non défini<%}%></td>
-</tr>
-</table>
-
 </div>
 </div>
 </body>

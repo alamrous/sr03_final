@@ -16,11 +16,12 @@
 </head>
 <body style="padding-top: 70px;">
 <%@ include file="header.jsp"%>
-<div class="well well-md">
-<label>Email</label>
-<input type="text" name="pwd_old" class="form-control" placeholder="Entrer l'ancien mot de passe"/>
+<div class="well well-md col col-md-5 col-md-offset-3">
+<p style="color: red; display: none;" id="PwdError">Mot de passe incorrect</p>
+<label>Ancien Mot de Passe</label>
+<input type="password" name="pwd_old" class="form-control" placeholder="Entrer l'ancien mot de passe" />
 <br/>
-<label>Password</label>
+<label>Nouveau Mot de Passe</label>
 <input type="password" name="pwd_new" class="form-control" placeholder="Entrer le nouveau mot de passe"/>
 <br/>
 <button class="form-control btn btn-primary" id="EditPwd"> Modifier</button>

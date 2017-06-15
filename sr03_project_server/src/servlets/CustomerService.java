@@ -142,9 +142,11 @@ public class CustomerService extends HttpServlet {
 	private Client updatePwd(HttpServletRequest request, Client client) {
 		Integer client_id = Integer.valueOf(request.getParameter("id"));
 		client = ClientManager.selectClientUsingId(client_id);
-		String mpd = request.getParameter("pwd_new");
+		String mpd = request.getParameter("newPwd");
+		System.out.println(mpd);
+		System.out.println(hashMdp(mpd));
 		ClientManager.updateClientPwd(client_id,hashMdp(mpd));
-		client.setPwd(mpd);
+		client.setPwd(hashMdp(mpd));
 		
 		return client;
 	}

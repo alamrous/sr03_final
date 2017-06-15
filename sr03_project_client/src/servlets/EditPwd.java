@@ -2,6 +2,8 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -34,7 +36,10 @@ public class EditPwd extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		Client client = (Client)request.getSession().getAttribute("client");
-		if(client.getPwd().equals(request.getParameter("pwd_old")) == false)
+		System.out.println("ANCIEN MDP "+client.getPwd());
+		System.out.println("HASH TEMOIN "+hashMdp("Pass5"));
+		System.out.println("NOUV MDP "+hashMdp(request.getParameter("oldPwd")));
+		if(client.getPwd().equals(hashMdp(request.getParameter("oldPwd"))) == false)
 		{
 			ObjectMapper mapper  = new ObjectMapper();
 			String data = mapper.writeValueAsString(false);
@@ -66,5 +71,31 @@ public class EditPwd extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-
+	private String hashMdp(String pwd){
+		String passwordToHash = pwd;
+        String generatedPassword = null;
+        try {
+            // Create MessageDigest instance for MD5
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            //Add password bytes to digest
+            md.update(passwordToHash.getBytes());
+            //Get the hash's bytes 
+            byte[] bytes = md.digest();
+            //This bytes[] has bytes in decimal format;
+            //Convert it to hexadecimal format
+            StringBuilder sb = new StringBuilder();
+            for(int i=0; i< bytes.length ;i++)
+            {
+                sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+            }
+            //Get complete hashed password in hex format
+            generatedPassword = sb.toString();
+        } 
+        catch (NoSuchAlgorithmException e) 
+        {
+            e.printStackTrace();
+        }
+        System.out.println(generatedPassword);
+        return generatedPassword;
+	}
 }

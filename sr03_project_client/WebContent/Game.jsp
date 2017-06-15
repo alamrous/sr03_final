@@ -17,6 +17,8 @@
 </head>
 <body style="padding: 70px">
 <%@ include file="header.jsp"%>
+<div class="row alert alert-success" style="display:none; text-align:center;" id="AddNotif"><strong>Ajout de l'article au Panier</strong></div>
+
 
 <% Jeu jeu = (Jeu)request.getAttribute("jeu"); %>
 <h1>Détails de <%= jeu.getTitle() %> (<%= jeu.getPlateforme().getName() %>)</h1>

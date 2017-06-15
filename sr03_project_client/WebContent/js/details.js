@@ -19,8 +19,11 @@ function addButtonListener(){
 			 xhr.addEventListener('readystatechange', function() {
 				   if (xhr.readyState === 4) { 
 				    	 xhr.abort();
-				    	 alert("Ajout effectué");
+				    	 document.querySelectorAll("#AddNotif")[0].style.display ="block";
+				    	 setTimeout(function(){
+					    	 document.querySelectorAll("#AddNotif")[0].style.display ="none";
 
+				    	 }, 2000);
 		    	    }	 
 				});
 //			 console.log(element.getAttribute('id'));
