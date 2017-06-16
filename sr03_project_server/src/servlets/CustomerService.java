@@ -57,6 +57,11 @@ public class CustomerService extends HttpServlet {
 		else if(action_name != null && action_name.equals("edit") ){
 			client = this.updateClient(request, client);
 		}
+		else if(action_name != null && action_name.equals("pwd"))
+		{
+			client = this.updatePwd(request, client);
+
+		}
 		//Cas de l'authentification	
 		if(client.getId() == null)
 		{
@@ -65,7 +70,6 @@ public class CustomerService extends HttpServlet {
 
 			client = ClientManager.selectClientUsingEmailUsingPwd(client.getEmail(), client.getPwd());
 		}
-		System.out.println(client);
 
 		ObjectMapper mapper  = new ObjectMapper();
 		String data = mapper.writeValueAsString(client);
@@ -75,15 +79,17 @@ public class CustomerService extends HttpServlet {
 		out.flush();
 	}
 
+
+
 	private void escapeValuesOfRequest(HttpServletRequest request) {
 		// TODO Auto-generated method stub
 		 Enumeration<String> parameterNames = request.getParameterNames();
 	
-		         while (parameterNames.hasMoreElements()) {
-		        	 
-		           System.out.println( request.getParameter(parameterNames.nextElement()));
-		  
-		         }
+//		         while (parameterNames.hasMoreElements()) {
+//		        	 
+//		           System.out.println( request.getParameter(parameterNames.nextElement()));
+//		  
+//		         }
 
 
 	}
@@ -95,6 +101,7 @@ public class CustomerService extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
+	
 	private Client addNewClient(HttpServletRequest request, Client client )
 	{
 		client.setName(StringEscapeUtils.escapeHtml(request.getParameter("name")));
@@ -131,6 +138,19 @@ public class CustomerService extends HttpServlet {
 
 		return client;
 	}
+	
+	private Client updatePwd(HttpServletRequest request, Client client) {
+		Integer client_id = Integer.valueOf(request.getParameter("id"));
+		client = ClientManager.selectClientUsingId(client_id);
+		String mpd = request.getParameter("newPwd");
+		System.out.println(mpd);
+		System.out.println(hashMdp(mpd));
+		ClientManager.updateClientPwd(client_id,hashMdp(mpd));
+		client.setPwd(hashMdp(mpd));
+		
+		return client;
+	}
+	
 	private Client updateClient(HttpServletRequest request, Client client){
 		Integer client_id = Integer.valueOf(request.getParameter("id"));
 
@@ -143,23 +163,14 @@ public class CustomerService extends HttpServlet {
 		if(client.getAddress() != request.getParameter("adress")) 
 			client.setAddress(StringEscapeUtils.escapeHtml(request.getParameter("adress")));
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-		if(request.getParameter("birthdate").equals(""))
-		{
-			client.setBirthdate(null);
+		System.out.println("BIRTH "+request.getParameter("birthdate"));
+		try {
+			client.setBirthdate(request.getParameter("birthdate").equals("")?null: formatter.parse(request.getParameter("birthdate")));
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
-		
-		if (client.getBirthdate() != null) {
-			Date date;
-			try {
-				date = formatter.parse(request.getParameter("birthdate"));
-				if (client.getBirthdate() != date)
-					client.setBirthdate(date);
 
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} 
-		}
 		if(client.getEmail() != request.getParameter("email")) 
 			client.setEmail(StringEscapeUtils.escapeHtml(request.getParameter("email")));
 		if(client.getPseudo()!= request.getParameter("pseudo")) 

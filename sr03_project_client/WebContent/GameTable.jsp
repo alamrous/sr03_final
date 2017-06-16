@@ -8,7 +8,7 @@
 	for (i = 0; i < liste.length; i++) {
 %>
 <div class="card"
-	style="border: 1px solid grey; width: 20rem; margin-right: 5%; margin-left: 1%; margin-bottom: 5%; border-radius: 5%; overflow-x: hidden; display: inline-block;">
+	style="border: 1px solid grey; width: 20rem;margin-left: 5%; margin-bottom: 5%; border-radius: 5%; overflow-x: hidden; display: inline-block;">
 	<img class="card-img-top" src="<%=liste[i].getImg_url()%>"
 		alt="Card image cap" style="width: 200px; height: 200px;">
 	<div class="card-block">
@@ -41,9 +41,8 @@
 			id="<%=liste[i].getPlateforme_jeu_fk()%>">Ajouter</button>
 		<form action="Game" method="GET" style="    display: inline;">
 			<input type="hidden" name="id"
-				value="<%=liste[i].getPlateforme_jeu_fk()%>"> <input
-				type="submit" class="btn btn-info" value="Details">
-			</button>
+				value="<%=liste[i].getPlateforme_jeu_fk()%>"> 
+				<input	type="submit" class="btn btn-info" value="Details">
 		</form>
 		<%} %>
 	</div>

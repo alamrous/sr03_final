@@ -39,6 +39,7 @@ public class EditProfile extends HttpServlet {
 		String completeURL = requestURL.toString();
 		 completeURL =  completeURL.substring(completeURL.indexOf('?'));
 		 String client_id = ((Client)request.getSession().getAttribute("client")).getId().toString();
+		 System.out.println(completeURL);
 		  String data = APIContact.getDataFromAPI("http://localhost:8080/sr03_project_server/Client"+completeURL+"&action=edit&id="+client_id);
 
 		  ObjectMapper mapper= new ObjectMapper();
